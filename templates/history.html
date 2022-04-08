@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% load static %}
+    {% if user %}
+
+        <link href="{% static '/bootstrap-4.5.3-dist/css/bootstrap.css' %}" rel="stylesheet" type="text/css">
+        <link href="{% static '/bootstrap-4.5.3-dist/css/bootstrap-grid.css' %}" rel="stylesheet" type="text/css">
+        <link href="{% static '/bootstrap-4.5.3-dist/css/bootstrap-reboot.css' %}" rel="stylesheet" type="text/css">
+        <link href="{% static '/css/style.css' %}" rel="stylesheet" type="text/css">
+
+
+        <link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <!-- load the d3.js library -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"
+                integrity="sha512-3P8rXCuGJdNZOnUx/03c1jOTnMn3rP63nBip5gOP2qmUh5YAdVAvFZ1E+QLZZbC1rtMrQb+mah3AfYW11RUrWA=="
+                crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+                integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+                crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+                integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+                crossorigin="anonymous"></script>
+        {#        <script#}
+        {#            src="https://code.jquery.com/jquery-3.6.0.slim.min.js"#}
+        {#            integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI="#}
+        {#            crossorigin="anonymous"></script>#}
+        {#    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>#}
+        {#    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js" type="text/javascript"></script>#}
+
+    <script src="{% static './script/d3_toImage.js' %}" type="text/javascript"></script>
+
+        <script src="{% static './script/newick.js' %}" type="text/javascript"></script>
+        <script src="{% static './script/d3cntxt.js' %}" type="text/javascript"></script>
+        <script src="{% static './script/d3.phylogram.js' %}" type="text/javascript"></script>
+        <script src="{% static './script/plot.js' %}" type="text/javascript"></script>
+
+        <script src="http://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+
+
+        </head>
+
+
+        <body>
+
+        <script>
+
+
+            $(document).ready(function () {
+                $('#example').dataTable({
+                    "columnDefs": [{
+                        "targets": 'no-sort',
+                        "orderable": false,
+                    }],
+                    "autoWidth": false,
+                    "order": [[0, "desc"]]
+                });
+
+            });
+
+
+            function startProcessing() {
+                console.log('started');
+                $('#myModal').modal('show');
+            }
+
+            function getslidervalue() {
+                $('#consensus-slider-value').text("Value is : " + jQuery('#consensus-slider').val() + " %");
+                return jQuery('#consensus-slider').val();
+            }
+
+            function getHeightSlider() {
+
+                $('#heightslider-value').text("HEIGHT SCALE : " + (jQuery('#heightslider').val()/100).toFixed(1) + " x");
+                var heightscaler = jQuery('#heightslider').val()
+                console.log('height scaler \n' + heightscaler)
+                return heightscaler;
+            }
+
+            function getWidthScaler() {
+
+                $('#widthslider-value').text("WIDTH SCALE : " + (jQuery('#widthslider').val()/100).toFixed(1) + " x");
+                var widthscaler = jQuery('#widthslider').val()
+                console.log('height scaler \n' + widthslider)
+                return widthscaler;
+            }
+
+
+            function create_tree(newick_tree, fasta_sequence, one_sequence_length, sequence_count) {
+                console.log('one_seq\n' + one_sequence_length + '\nseq_count\n' + sequence_count);
+
+                console.log('present');
+                var newick = Newick.parse(newick_tree)
+                var newickNodes = []
+
+                function buildNewickNodes(node, callback) {
+                    newickNodes.push(node)
+                    if (node.branchset) {
+                        for (var i = 0; i < node.branchset.length; i++) {
+                            buildNewickNodes(node.branchset[i])
+                        }
+                    }
+                }
+
+                buildNewickNodes(newick)
+
+                var one_seq_length = one_sequence_length
+                var seq_count = sequence_count
+
+                var lines = fasta_sequence;
+                // Loop through all lines
+                console.log('lines out')
+
+                var lines_array = [];
+                var lines_object = {};
+                var map = new Map();
+                var csrf = '';
+                csrf = '{{ csrf_token }}';
+                console.log('lines' + lines)
+
+                lines_array = lines.split('\n');
+
+                console.log('seq count\n' + seq_count)
+
+                d3.phylogram.build('#phylogram', newick, {
+                    {#width:300,#}
+                    width: one_seq_length / 20,
+                    height: seq_count / 50
+                }, lines_array, csrf);
+
+
+            }
+        </script>
+
+
+
+        <div class="tooltip">Hover over me
+            <span class="tooltiptext">Tooltip text</span>
+        </div>
+
+        <div id="home">
+            <nav class="navbar navbar-expand-lg navbar-light bg-custom">
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarResponsive">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a href="/upload">
+                                <img src="{% static 'img/phylogenyx3.png' %}" style="max-width: 155px;"/>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/upload">&nbsp;&nbsp;TREE ANALYZER <span
+                                    class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+
+                            <a class="nav-link" href="/sequenceanalyzer">SEQUENCE ANALYZER</a>
+                        </li>
+                        {% if user.is_authenticated %}
+                            <li class="nav-item active">
+                                <a class="nav-link" href="/history">MY PROJECTS</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+
+
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Welcome, {{ user.username }}</a>
+                        </li>
+
+                        <li class="nav-item" style="margin-left: 10px;">
+                            <a class="nav-link" href="/logout">| Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <progress class="progress" max="100" value="25">
+            </progress>
+        </div>
+
+
+
+        <div class="slidecontainer" style="padding-left: 2%;">
+                    <br><p style="font-size: 9px; color: #86343b">| NOTE: TREE SCALERS NEED TO BE CHANGED BEFORE GRAPH IS VISUALISED</p><br>
+                <div>
+                    TREE HEIGHT SCALE[MIN - MAX]
+                    <input type="range" step="10" min="1" max="200" value="100" class="slider3" id="heightslider" onchange="getHeightSlider()"
+                           name="heightslider"
+                    >
+                                  <div id="heightslider-value"></div>
+
+                </div>
+                <div>
+                    <br>
+                    TREE WIDTH SCALE[MIN - MAX]
+                    <input type="range"  step="10" min="1" max="200" value="100" class="slider3" id="widthslider" name="widthslider" onchange="getWidthScaler()"
+                    >
+                                                      <div id="widthslider-value"></div>
+
+                </div>
+            </div>
+        <!--<div class="delimeter"></div>-->
+
+   <div id="options" style="display:none;padding-left: 2%;margin-top: 1%;">
+
+         <div>
+            TREE CONSENSUS VALUE[0% - 100%]
+            <input type="range" min="0" max="100" value="90" class="consensus-slider" id="consensus-slider"
+                   onchange="getslidervalue()">
+              <div id="consensus-slider-value"></div>
+                                                <button class="btn btn-info" id='saveTree'>PNG<i class="fas fa-download" style="margin-left: 15px;"></i></button>
+
+        </div>
+
+   </div>
+<div class="history-switcher" id="history-switcher" style="padding-left: 2%;margin-top: 2%;">
+                <button class="btn btn-info" onclick="togglehistory();deletesvgtree(); deleteCreatedGraph();"> TOGGLE HISTORY
+                    <i class="fas fa-book"></i></button>
+            </div>
+        <div class="d3tree" id="d3tree" style="margin-left: 2%; margin-top: 2%;font-weight: bold;">
+
+            <div id='phylogram' style="margin-top: 3%;"></div>
+
+        </div>
+
+        <div class="table-content" id="table-content">
+            <table id="example" class="display" autoWidth=false>
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>NAME</th>
+                    <th>SEQUENCE SHOWCASE</th>
+                    <th>TREE</th>
+                    <th>CREATED AT</th>
+                    {#                <th class="no-sort">DOWNLOAD</th>#}
+                    <th class="no-sort">DELETE</th>
+
+
+                </tr>
+                </thead>
+                <tbody>
+                {% for seq in sequence %}
+                    <tr>
+                        <div class="seqid">
+                            <td>{{ seq.id | safe }}</td>
+                        </div>
+                        <td>{{ seq.name | safe }}</td>
+                        <td>{{ seq.sequence | safe | truncatechars:105 }}
+                            <button style="border-radius: 20px; background-color: #9DCA3B; color: white;"
+                                    onclick='getSequenceString("{{ seq.name|safe }}",{{ seq.id | safe }})'
+                            >
+                                <i class="fa fa-download" aria-hidden="true"></i> .fas
+                            </button>
+                            <button style="border-radius: 20px; background-color: #9DCA3B; color: white;"
+                                    onclick="getGapStatistics({{ seq.id | safe }}, {{ seq.se }}); togglehistory();">
+                                GAP ANALYZER
+                                <i class="fa fa-chart-area" aria-hidden="true"></i>
+                            </button>
+                            <br>
+
+                            <span class="badge badge-info">SEQUENCE LENGTH : {{ seq.one_sequence_length }} </span> <span
+                                    class="badge badge-info">SEQUENCE COUNT : {{ seq.sequence_count }}</span> <span
+                                    class="badge badge-info">{{ seq.options }}</span>
+
+
+                        </td>
+                        <td>{{ seq.tree | safe | truncatechars:56 }} <br>
+                            <button style="border-radius: 20px; background-color: #9DCA3B; color: white;"
+                                    onclick='togglehistory(); toggleoptions();create_tree({{ seq.tree }},{{ seq.sequence }},"{{ seq.one_sequence_length }}"*getWidthScaler(), "{{ seq.sequence_count }}"*getHeightSlider())'
+                            > VIEW TREE <i class="fas fa-eye"></i>
+                                <i class="fa fa-bar-chart-o" aria-hidden="true"></i>
+                            </button>
+                            <button style="border-radius: 20px; color: #9DCA3B; background-color: white;"
+                                    onclick='getNewickTree("{{ seq.name|safe }}",{{ seq.id | safe }})'
+                            > NWK
+                                <i class="fa fa-download" aria-hidden="true"></i>
+                            </button>
+                            <button style="border-radius: 20px; color: #3b3dca; background-color: white;"
+                                    onclick='getNexusTree("{{ seq.name|safe }}",{{ seq.id | safe }})'
+                            > XML
+                                <i class="fa fa-download" aria-hidden="true"></i>
+                            </button>
+                             <button style="border-radius: 20px; color: #3b3dca; background-color: white;"
+                                    onclick='getNexmlTree("{{ seq.name|safe }}",{{ seq.id | safe }})'
+                            > NEXML
+                                <i class="fa fa-download" aria-hidden="true"></i>
+                            </button>
+{#                            <button style="border-radius: 20px; color: #ba4f1d; background-color: white;"#}
+{#                                    onclick='download("{{ seq.name | safe }}.xml", {{ seq.nexmltree | safe }})'#}
+                                    {#                                onclick='getNexmlTree("{{ seq.name|safe }}",{{seq.id | safe}})'#}
+{#                            > NEXML#}
+{#                                <i class="fa fa-download" aria-hidden="true"></i>#}
+{#                            </button>#}
+                        </td>
+                        <td>{{ seq.date | safe | truncatechars:20 }}</td>
+                        {#                    <td>#}
+                        {#                        <button style="border-radius: 20px; color: #9DCA3B; background-color: white;"#}
+                        {#                                onclick='download("{{ seq.name|safe}}", {{seq.sequence|safe}})'#}
+                        {#                                        >#}
+                        {#                            <i class="fa fa-download" aria-hidden="true"></i>#}
+                        {#                        </button>#}
+                        {#                    </td>#}
+                        <td>
+                            <button style="border-radius: 20px; background-color: #9DCA3B; color: white;"
+                                    onclick='delete_sequence("{{ seq.id|safe }}")'
+                            >
+                                <i class="fas fa-trash" aria-hidden="true"></i>
+                            </button>
+                        </td>
+
+                    </tr>
+                {% endfor %}
+
+                <tfoot>
+                <tr>
+                    <th>ID</th>
+                    <th>NAME</th>
+                    <th>SEQUENCE SHOWCASE</th>
+                    <th>TREE</th>
+                    <th>CREATED AT</th>
+                    {#                <th class="no-sort">DOWNLOAD</th>#}
+                    <th class="no-sort">DELETE</th>
+
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+        <div class="row">
+
+            <div class="history-switcher" id="tree-switcher"
+                 style="padding-left: 1%;margin-top: 2%; visibility: hidden">
+                <button class="btn btn-info" onclick="deletesvgtree();togglehistory();"> HIDE TREE
+                    <i class="fas fa-book"></i></button>
+            </div>
+            {#                <div class="switcher" id="history-switcher" style="padding-left: 1%;margin-top: 2%;">#}
+            {# <button class="btn btn-info" onclick="creategraph(); togglehistory();"> GAP ANALYZER#}
+            {#<i class="fas fa-book"></i>                        </button >#}
+            {#    </div>#}
+
+
+        </div>
+
+   <div class="gap-switcher" id="gap-switcher" style=" margin-left:2%;visibility: hidden">
+
+                                                           <button class="btn btn-info" id='saveGraph'>PNG<i class="fas fa-download" style="margin-left: 15px;"></i></button>
+
+            </div>
+
+
+        <div id="my_dataviz_parent">
+            <div id="my_dataviz">
+                <svg class="chart"></svg>
+
+            </div>
+
+        </div>
+
+
+    {% endif %}
+
+    <div class="modal" id="myModal" data-backdrop="false">
+        <div class="modal-dialog">
+
+            <div class="modal-content">
+                <h3>Processing data</h3>
+
+                <div class="progress-container">
+                    <div class="progress-materializecss">
+                        <div class="indeterminate"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal" id="modal-information" tabindex="-1" z-index="-1" role="dialog">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content" style="width:1320px; left: 0">
+                <div class="modal-header">
+                    <h5 class="modal-title">Consensus from subtree sequencies</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="
+    word-wrap: break-word;">
+                    <h2>SELECTED SEQUENCIES</h2>
+                    <div class="selected-sequences" id="selected-sequencies"></div>
+
+                    <div class="sequence-result" style="overflow:hidden; margin-top: 6%;">
+                        <h2>CONSENSUS RESULT</h2>
+                        <div id="sequence-result">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </body>
+<script>
+    function download(filename, text) {
+        console.log('downloading');
+        console.log(text);
+        var string = text;
+        var element = document.createElement('a');
+        element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(string));
+        element.setAttribute('download', filename);
+
+        element.style.display = 'none';
+        document.body.appendChild(element);
+
+        element.click();
+
+        document.body.removeChild(element);
+    }
+
+
+    getslidervalue();
+    getHeightSlider();
+    getWidthScaler();
+
+
+    function getCharacterStatistics(id, char_to_find) {
+        $.ajax({
+            url: "/history/delete",
+            async: false,
+            method: "POST",
+            headers: {
+                'X-CSRFToken': '{{ csrf_token }}',
+            },
+            data: {'sequence': sequence, 'char_to_find': char_to_find},
+        }).done(function (data) {
+            creategraph(data)
+            location.reload();
+        }).fail(function () {
+            $('#myModal').modal('hide');
+            alert("Error ocurred\n");
+        });
+    }
+
+    function delete_sequence(id) {
+        $.ajax({
+            url: "/history/delete",
+            async: false,
+            method: "POST",
+            headers: {
+                'X-CSRFToken': '{{ csrf_token }}',
+            },
+            data: {'id': id},
+        }).done(function (data) {
+            console.log('done' + data)
+            location.reload();
+        }).fail(function () {
+            $('#myModal').modal('hide');
+            alert("Error ocurred\n");
+        });
+    }
+
+
+    function getGapStatistics(id) {
+        $.ajax({
+            url: "/gapstats",
+            async: false,
+            method: "POST",
+            headers: {
+                'X-CSRFToken': '{{ csrf_token }}',
+            },
+            data: {'id': id},
+        }).done(function (data) {
+            creategraph(data);
+            {#console.log('done' + data)#}
+        }).fail(function () {
+            $('#myModal').modal('hide');
+            alert("Error ocurred\n");
+        });
+    }
+
+    function getSequenceString(filename, id) {
+        $.ajax({
+            url: "/getsequence",
+            async: false,
+            method: "POST",
+            headers: {
+                'X-CSRFToken': '{{ csrf_token }}',
+            },
+            data: {'id': id},
+        }).done(function (data) {
+            console.log('downloading');
+
+            var string = data.replace(/\\r\\n/g, "\r\n").replace(/['"]+/g, '')
+            console.log(string);
+            var element = document.createElement('a');
+            element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(string));
+            element.setAttribute('download', filename);
+
+            element.style.display = 'none';
+            document.body.appendChild(element);
+
+            element.click();
+
+            document.body.removeChild(element);
+            console.log('done' + data)
+            return data;
+        }).fail(function () {
+            $('#myModal').modal('hide');
+            alert("Error ocurred\n");
+        });
+    }
+
+
+    function getNewickTree(filename, id) {
+        $.ajax({
+            url: "/getnewicktree",
+            async: false,
+            method: "POST",
+            headers: {
+                'X-CSRFToken': '{{ csrf_token }}',
+            },
+            data: {'id': id},
+        }).done(function (data) {
+            console.log('downloading');
+
+            var string = data.replace(/\\r\\n/g, "\r\n").replace(/['"]+/g, '')
+            console.log(string);
+            var element = document.createElement('a');
+            element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(string));
+            filename = filename + ".nwk";
+            element.setAttribute('download', filename);
+
+            element.style.display = 'none';
+            document.body.appendChild(element);
+
+            element.click();
+
+            document.body.removeChild(element);
+            console.log('done' + data)
+            return data;
+        }).fail(function () {
+            $('#myModal').modal('hide');
+            alert("Error ocurred\n");
+        });
+    }
+
+    function getNexusTree(filename, id) {
+        $.ajax({
+            url: "/getnexustree",
+            async: false,
+            method: "POST",
+            headers: {
+                'X-CSRFToken': '{{ csrf_token }}',
+            },
+            data: {'id': id},
+        }).done(function (data) {
+            console.log('downloading');
+
+            var string = data.replace(/\\r\\n/g, "\r\n").replace(/['"]+/g, '')
+            console.log(string);
+            var element = document.createElement('a');
+            element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(string));
+            filename = filename + ".nex";
+            element.setAttribute('download', filename);
+
+            element.style.display = 'none';
+            document.body.appendChild(element);
+
+            element.click();
+
+            document.body.removeChild(element);
+            console.log('done' + data)
+            return data;
+        }).fail(function () {
+            $('#myModal').modal('hide');
+            alert("Error ocurred\n");
+        });
+    }
+
+    function getNexmlTree(filename, id) {
+        $.ajax({
+            url: "/getnexmltree",
+            async: false,
+            method: "POST",
+            headers: {
+                'X-CSRFToken': '{{ csrf_token }}',
+            },
+            data: {'id': id},
+        }).done(function (data) {
+            console.log('downloading');
+            //replace all unwanted characters caused by parsing
+            var string = data.replaceAll(/\\n/g, '').replaceAll(/\\/g, '').replaceAll(/"</g,'<').replaceAll(/>"/g,'>');
+            console.log(string);
+            var element = document.createElement('a');
+            element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(string));
+            filename = filename + ".xml";
+            element.setAttribute('download', filename);
+
+            element.style.display = 'none';
+            document.body.appendChild(element);
+
+            element.click();
+
+            document.body.removeChild(element);
+            console.log('done' + data)
+            return data;
+        }).fail(function () {
+            $('#myModal').modal('hide');
+            alert("Error ocurred\n");
+        });
+    }
+
+
+    function togglehistory() {
+        $('#table-content').toggle();
+        if ($('#options').css('display') == 'block')
+            $('#options').css('display', 'none');
+    }
+
+    function toggleoptions() {
+        if ($('#options').css('display') == 'none')
+            $('#options').css('display', 'block');
+        else if ($('#options').css('display') == 'block')
+            $('#options').css('display', 'none');
+
+        if ($('#tree-switcher').css('display') == 'block')
+            $('#tree-switcher').css('display', 'none');
+        else if ($('#tree-switcher').css('display') == 'none')
+            $('#tree-switcher').css('display', 'block');
+    }
+
+
+</script>
+
+
+</html>

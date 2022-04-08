@@ -1,0 +1,203 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+
+body{
+    background-color: #fafafa;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+}
+
+.logo {
+    opacity: 0.99;
+    background-image: url("../img/dna2.jpg");
+    background-repeat: no-repeat;
+    width: 66px;
+    height: 34px;
+    padding: 0;
+    display: inline-block;
+    border: 0px;
+    margin: 0px;
+
+}
+
+.logo1 {
+
+    background-image: url("../img/dna.jpg");
+    background-repeat: no-repeat;
+    width: 300px;
+    height: 100px;
+    padding: 0;
+    display: inline-block;
+    border: 0px;
+    margin: 0px;
+    opacity: 0.65;
+
+}
+
+.navbar {
+    text-transform: uppercase;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    font-size: 0.96rem;
+    letter-spacing: .2rem;
+    color: rgba(10, 0, 0, 0.9);
+}
+
+.bg-custom{
+    background: linear-gradient( white);
+}
+
+
+hr{
+    background: linear-gradient(to right, #c3c3c3, #c3c3c3,#c3c3c3,#c3c3c3,white);
+    position: relative;
+    bottom: 15px;
+    height: 1px;
+    border: none;
+}
+
+.hr-1{
+    background: linear-gradient(to right, #46cf2d, #46cf2d, #46cf2d, #90c386,#fafafa);
+    position: relative;
+    bottom: 15px;
+    height: 3px;
+    border: none;
+}
+
+.delimeter {
+    position: relative;
+    background-image: linear-gradient(to right, #2e969c, #40dfe5, white);
+    height: 3px;
+}
+
+.semi-transparent-delimeter{
+    position: relative;
+    background-image: linear-gradient(to right, #c3c3c3, #c3c3c3,#c3c3c3,#c3c3c3,#c3c3c3,#c3c3c3,white);
+    height: 2px;
+}
+
+.text-left{
+    text-align: left;
+    padding-left: 20.5%;
+}
+
+.text-centered{
+    text-align: center;
+}
+
+.text-rigt{
+    text-align: right;
+    padding-right: 20.5%;
+}
+
+.additional-information{
+    font-size: 10px;
+    padding-left: 5%;
+    padding-right: 5%;
+    text-align: left;
+}
+
+.sequence-history{
+    width: 60%;
+    height: auto;
+    margin: 0 auto;
+    padding: 10px;
+    position: relative;
+}
+
+.sequence-header{
+    padding-top: 1%;
+    padding-bottom: 1%;
+    text-align: left;
+    font-size: 10px;
+}
+
+.sequence-content{
+    padding-left: 2%;
+    padding-bottom: 1%;
+    font-family: monospace;
+    text-align: left;
+    font-size: 7px;
+}
+
+
+
+
+/*===================DROP AREA SECTION START=======================*/
+#drop-area {
+    left:0;
+    border: 2px dashed #ccc;
+    border-radius: 20px;
+    width: 480px;
+    letter-spacing: .07rem;
+    margin: 2% auto;
+    padding: 20px;
+}
+#drop-area.highlight {
+    border-color: purple;
+}
+p {
+    margin-top: 0;
+}
+.my-form {
+    margin-bottom: 10px;
+}
+#gallery {
+    margin-top: 10px;
+}
+#gallery img {
+    width: 150px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+.button {
+    display: inline-block;
+    padding: 10px;
+    background: #ccc;
+    cursor: pointer;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+.button:hover {
+    background: #ddd;
+}
+#fileElem {
+    display: none;
+}
+
+.footer-logos {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+/*===================DROP AREA SECTION END=======================*/
+
+
+/*===================TEXT AREA SECTION START=======================*/
+input[type=text], select {
+    width: 15%;
+    padding: 3px 2px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type=submit] {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type=submit]:hover {
+    background-color: #45a049;
+}
+
+
+/*===================TEXT AREA SECTION END=======================*/
