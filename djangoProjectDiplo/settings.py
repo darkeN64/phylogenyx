@@ -26,7 +26,7 @@ SECRET_KEY = '-#xvckru4%f)op_a8ontqstny^$^%e50vzxwhab_3fh96-q#s3'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['http://localhost:81']
 
 
 # Application definition
