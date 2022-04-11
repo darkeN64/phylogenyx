@@ -26,9 +26,7 @@ SECRET_KEY = '-#xvckru4%f)op_a8ontqstny^$^%e50vzxwhab_3fh96-q#s3'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['http://localhost:81']
-
-
+ALLOWED_HOSTS = ['147.232.40.69', 'localhost', '127.0.0.1','crafters.fei.tuke.sk']
 # Application definition
 
 INSTALLED_APPS = [
@@ -57,7 +55,7 @@ ROOT_URLCONF = 'djangoProjectDiplo.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates']
+        'DIRS': [BASE_DIR / 'static']
         ,
         'APP_DIRS': True,
         'OPTIONS': {
@@ -130,6 +128,10 @@ STATIC_URL = '/static/'
 
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
 
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+)
+
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'templates'),
+    os.path.join(BASE_DIR, 'static'),
 )

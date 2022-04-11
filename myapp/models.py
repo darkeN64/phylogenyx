@@ -10,6 +10,7 @@ class Sequence(models.Model):
     name = models.CharField(max_length=70)
     sequence = models.CharField(max_length=712364)
     tree = models.CharField(max_length=712364)
+    phyloxmltree = models.CharField(max_length=712364)
     nexmltree = models.CharField(max_length=712364)
     nexustree = models.CharField(max_length=712364)
     one_sequence_length = models.CharField(max_length=712364)

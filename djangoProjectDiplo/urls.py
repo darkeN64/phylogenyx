@@ -22,10 +22,9 @@ from myapp import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.upload, name='upload'),
+    path('', views.login_request, name='login'),
     path('upload/', views.upload, name='upload'),
     path('upload/currentnode', views.currentnode, name='currentnode'),
-    path('upload/tooltip', views.tooltip, name='tooltip'),
     path('upload/options', views.options, name='options'),
     path("register", views.register_request, name="register"),
     path("login", views.login_request, name="login"),
@@ -37,8 +36,10 @@ urlpatterns = [
     path("getnewicktree", views.getNewickTree, name="getnewick"),
     path("getnexustree", views.getNexusTree, name="getnexus"),
     path("getnexmltree", views.getNexmlTree, name="getnexml"),
+    path("getphyloxmltree", views.getPhyloxmlTree, name="getphyloxml"),
     path("sequenceanalyzer", views.sequenceAnalyzer, name="sequenceanalyzer"),
-    path("sequenceanalyzervariable", views.sequenceAnalyzerJQuery, name="sequenceanalyzervariable")
+    path("sequenceanalyzervariable", views.sequenceAnalyzerJQuery, name="sequenceanalyzervariable"),
+    path("tooltip", views.tooltip, name="tooltip"),
 
     # path('consensus/', views.consensus, name='consensus'),
 

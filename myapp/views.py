@@ -77,43 +77,6 @@ def upload(request):
                     for i in range (m.start(), m.end()):
                         list[i]+=1
 
-        seq1 = Seq("-----------------------------MGKIIGIDLGTTNSCVAVLDGDTPR-ILENAEG----ERTTASVIAYT--D--GETLVGQPAKRQAITNPQNTLFAIKRLIG-RRF----EDEEVQRDI-EIMPYKIIKADNGDAWVEA----K--GQK-M-----AAPQVSAEILKKMKKTAEDFLGEEVTGAVVTVPAYFNDAQRQATKDAGRIAGLDVKRIINEPTAAALAYGLDK--K-GGD--RTIAVYDLGGGTFDISIIEI---D-NVDGE-QTFEVLATNGDTHLGGEDFDNRLINFLVDEF-KKEQG-FDLK--NDPLAMQRVKEAAEKAKIELSSAQQTDVNLPYVT--A-----DA-T-G----PKHMNIKVTRAKLESLVEDLVVRTLEPLKVALADADLT-IDGITDVILVGGQTRMPMVQAKVAEFF-GKEARRDVNPDEAVAMGAAVQGGVLAG--D--V-KDVL-LLDVTPLSFGIETMGGVMTKLIEKNTTIPTKADQTFSTAEDNQSAVTIHVLQGERKQASYNKSLGQFNLEGIQAAPRGMPQIEVTFDLDADGILNVSAKDKSTGKEQKITIQAS-GGLTDEEIEAMVQEAEANKDADKKFEELVTARNQADQMIHGTKKQIE-E----AGDD-------L-PTDEKEKI---EAAITALEGVK--------SGDD------KEAIDAKTQELM---QAAQKL--MEIAQQ------------------------------------KAQA---------------------------------QQG----------------------------------------------------------------------------------------AQAG---------E-----QPKQE--------------------------------------------------DDVVDA------------EFEEV---------K-------------------------------------")
-        seq2 = Seq("-----------------------------MTKIIGIDLGTTNSCVAVMEGGIAK-IIENAEG----SRTTPSIVAYA-NN---ETLAGQPAKRQSVTNSTNTLFAIKRLIG-RKF----DDKEVQKDI-KLAPYKIVKADNGDAWVEV----D--GKA-L-----SPQEVSAQILRKLKKDAEAYLGETVTDAVITVPAYFNDSQRQATKDAGKIAGLNVKRIINEPTAAALAYGVDK--N-SNA-DQKVVVYDLGGGTFDLSIIEI---S-NVDGE-KQFEVLATNGDTFLGGEDFDLRLINYLADEF-KKESG-IDIH--QDTLALQRIKEAAEKAKIELSSALQTEVNLPYVT--A-----DA-S-G----PKHLNVKVTRAKLESLVDDLVKSTIAPCEQALKDAGLS-KADVSEVILVGGQTRMPKVQEAVKTFF-SKEPRKDVNPDEAVAMGAAIQAGVMSG--A--V-DDVL-LLDVAPLSLGIETLGGVMTKLIEKNTTIPTRASETFSTAEDNQAAVTVHVLQGQREMATDNKSLGQFNLTDINPGPRGSVQVEVTFDIDVNGILNVSAKDKATGKEQSIKITAS-SGLTEDEINRMVKEAELHASEDKQKRELVDQRNQADQLIHTVQTSMT---------S-------L-AQDQQTEL---KTLIEQLKMAV--------NGSD------KAAIEMRQSALQ---EAYSKTMQTEQAQS------------------------------------QQAA---------------------------------QHQ----------------------------------------------------------------------------------------GNAA---------N-----DGAKD--------------------------------------------------EDIIDA------------DFEDV---------SNG-----------------------------------")
-        seq3 = Seq("-----------------------------MGKVVGIDLGTTNSVVAVMEGGKPV-VIANAEG----MRTTPSVVGFS-KD--GERVVGQMARRQTVLNPQNTFFAVKRYIG-RRY----NELSPES---KRVPYTIRKDEVGNIKVAC----PRLNKE-F-----SAEEISAMVLKKLADDASAYLGSAVTGAVITVPAYFNDSQRQATRDAGRIAGLEVLRILNEPTAASLAYGLDR----GDT--ETILVFDLGGGTFDVSILEV---G-D-----GVFEVKATSGDTQLGGNDFDKKIVDWLAEQF-LETEG-VDLR--RDRQALQRLMEAAEKAKIELSAVSITDINLPFIT--A-----TE-D-G----PKHLETRLTRSQFEGLCVDLLGRVRNPVKRALKDAGLR-PDDIEEVVLVGGSTRMPMVKQLVRDLI-GIEPSENVNPDEVVAMGAAIQAGILAG--E--F-KDVL-LLDVTPLSLGLEAIGGVMKKLIPRNTTIPVRRSDIFSTSENNQNSVEIHVVQGEREMAGDNKSLGRFKLYGIPPAPRGIPQIQVAFDIDANGILQVTALDRTTGREQSITIQGA-STLSESEVNRMIQEAQKYADVDRERKERVEKRTRSEALILQGERQLR-EVALEFGMQ-------F-ARNRRQRI---DNISRELKESL--------KEND------DRGIDQAYADLQ---DALYEL--NREVRQYYAEDEDDDLFATIKDIFVGDKDKERDLPRDSYRERDAYN---------------------------------NRD---------YGRDYGRDY----------------------------------------------------------------------GRDS-----RPSYD-----NSRPP--------------------------------------------------RKSPRP------------SYQDN--------WDDDDDWL-------------------------------")
-        seq4 = Seq("-----------------------------MGRIVGIDLGTTNSVIGVLEAGRPF-VIANAEG----SRTTPSVIGYT-KE--SELVVGQQARRQLVLNPKNTFSNLKRYVG-RSW----DELEENS---LNVAYTIRANNQGCVRVTC----PITERE-Y-----APEELIGSIIRKLIDDAEKYLSETIDSAVITVPAYFNDSQRQATKDAALLAGVRVERILNEPTAAALAYGFDK----SSS--SRVLVFDLGGGTFDISLLRI---S-N-----GVFDVKATSGDTQLGGNDFDQKIVEWLANDF-KKEHN-IDLR--RDRQSLQRLNEVAEKAKQELSGLNSTPISLPFIA--T-----GP-N-G----PLHIETKLDRKTFESLCKDLIDRLLQPVEVALQDSGWT-ADDINDVVLVGGGTRMPMVQQLVKTIV-PVTPSQSVNPDEVVAIGAAVQAGILTG--E--L-RDLL-LNDVTPLSLGLETIGGLMKVLIPRNTPIPVRQADVFSTSEANQSSVEINVWQGERQLASDNKSLGKFRLSGIPPAPRGVPQVQVAFDIDANGMLQVSATDRTTGRKQSVSINGG-SNLNEDEVNNLIEEAKDKADVDRRKRASIDQRNNALTLVAQAERRLR-DVSLEFG-P-------YGAERQQRAV---EVSLRDVQDFL--------DSDD------LAELDLAVSSLQ---EALFGL--NRRISA------------------------------------EKRT---------------------------------DNN----------------------------------------------------------------------------------------PIQG----IKNTFG-----SLKDELFS-----------------------------------------------DDYWDD---------DPWDYHPN---------NNRVGGGRDYGGRNLDRWDNDFYN--------------")
-
-
-        alignments = pairwise2.align.globalxx(seq1, seq2)
-
-        print('1st')
-        print(format_alignment(*alignments[2]))
-        alignments = pairwise2.align.globalxx(seq1, seq3)
-
-        print('2nd')
-
-        print(format_alignment(*alignments[2]))
-        alignments = pairwise2.align.globalxx(seq1, seq4)
-
-        print('3rd')
-
-        print(format_alignment(*alignments[2]))
-        alignments = pairwise2.align.globalxx(seq2, seq3)
-
-        print('4th')
-
-        print(format_alignment(*alignments[2]))
-        alignments = pairwise2.align.globalxx(seq2, seq4)
-
-        print('5th')
-
-        print(format_alignment(*alignments[2]))
-        alignments = pairwise2.align.globalxx(seq3, seq4)
-
-        print('6th')
-
-        print(format_alignment(*alignments[2]))
-
-
 
         print('count is : +'+ str(str_text.count('-')))
         output_str = 'id,value,\r\n'
@@ -139,7 +102,7 @@ def upload(request):
                 sequence.options = "MATRIX: "+matrix+" TREE: "+tree_type + " GAPS: "+ str(num_of_gaps)
                 sequence.gap_statistics = output_str
                 sequence.tree = 'N\A'
-                sequence.treexml = 'N\A'
+                sequence.phyloxmltree = 'N\A'
                 sequence.nexmltree = 'N\A'
                 sequence.nexustree = 'N\A'
                 sequence.save()
@@ -188,12 +151,13 @@ def upload(request):
         print('result is: ')
         # print(result)
         if 'database' in request.POST:
-            print('saving tree')
-            sequence.nexmltree = json.dumps(string2)
-            sequence.nexustree = json.dumps(string3)
-            sequence.treexml = json.dumps(string4)
-            sequence.tree = json.dumps(string1)
-            sequence.save()
+            if request.user.is_authenticated:
+                print('saving tree')
+                sequence.nexmltree = json.dumps(string2)
+                sequence.nexustree = json.dumps(string3)
+                sequence.phyloxmltree = json.dumps(string4)
+                sequence.tree = json.dumps(string1)
+                sequence.save()
 
         context['newick'] = json.dumps(string1).replace("'","")
         context['alignment'] = alignment
@@ -245,25 +209,7 @@ def currentnode(request):
     context = {}
     context['subtree_consensus'] = consensus.encode('utf8')
 
-    # return render(request, HttpResponse.status_code.OK, context)
-
-
     return HttpResponse(consensus, status=200)
-
-
-def tooltip(request):
-    print("starting tooltip")
-    node_names = request.POST.getlist('name')
-    sequence = ""
-    print('node name' + str(node_names[0]))
-    for node_name in node_names:
-        with open("actual.fas", 'r') as f:
-            for line in f:
-                if line.startswith('>' + node_name):
-                    sequence = str(next(f))
-
-    # return render(request, HttpResponse.status_code.OK, context)
-    return HttpResponse(sequence, status=200)
 
 
 def register_request(request):
@@ -281,6 +227,10 @@ def register_request(request):
 
 
 def login_request(request):
+    if request.user.is_authenticated:
+        current_user = request.user
+        return redirect('/upload')
+
     if request.method == "POST":
         form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
@@ -314,6 +264,9 @@ def history(request):
 
     return render(request, 'history.html', context)
 
+def tooltip(request):
+
+    return render(request, 'tooltip.html')
 
 def delete(request):
     global id, current_user
@@ -385,6 +338,15 @@ def getNexmlTree(request):
 
     return HttpResponse(tree, status=200)
 
+def getPhyloxmlTree(request):
+    global id
+    if request.method == "POST":
+        id = str(request.POST.getlist('id')).replace('[','').replace("'","").replace("]","")
+    print('id ' + id)
+    tree = Sequence.objects.get(pk=id).phyloxmltree
+    print('tree\n' + tree)
+
+    return HttpResponse(tree, status=200)
 
 def sequenceAnalyzer(request):
     context = {}
