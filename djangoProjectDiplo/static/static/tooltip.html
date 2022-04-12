@@ -42,28 +42,6 @@
 
 <body>
 
-
-<div class="modal" id="myModal" data-backdrop="false">
-    <div class="modal-dialog">
-
-        <div class="modal-content">
-            <h3>Processing data</h3>
-
-            <div class="progress-container">
-                <div class="progress-materializecss">
-                    <div class="indeterminate"></div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</div>
-
-
-<div class="tooltip">Hover over me
-    <span class="tooltiptext">Tooltip text</span>
-</div>
-
 <div id="home">
     <nav class="navbar navbar-expand-lg navbar-light bg-custom">
         <button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -152,7 +130,7 @@ Samotnou vizualizáciou sa nám zobrazujú prehľadne aj ďalšie informácie o 
 Časti stromu by sme mohli rozdeliť na vnútorné a vonkajšie uzly stromu(listy). Vonkajšie uzly sú reprezentované presne definovanou sekvenciou zo vstupného súboru. Avšak, vnútorné uzly presnú interpretáciu nemajú. Môžeme ich avšak brať ako prienik množín všetkých dcérskych uzlov. Vyjadrenie pravdepodobnej sekvencie vnútorného uzla vieme určiť napríklad pomocou výpočtu konsenzu medzi jednotlivými sekvenciami.
 Na výpočet takejto hodnoty bolo nutné implementovať do knižnice funkcionalitu, ktorá zabezpečí to, aby sa po vybraní konkrétneho uzla dali z neho vypočítať prieniky hodnôt(konsenzus) zo všetkých jeho dcérskych uzlov. Pre získanie tejto hodnoty je nutné kliknúť pravým tlačidlom myši na ľubovoľný uzol v rámci vygenerovaného stromu. Následne sa pri danom uzle objaví menu:
 
-Po kliknutí na položku „Compute subtree consensus“ dôjde k odoslaniu dát na výpočet pre konsenzu zo sekvencií z daného uzla. Mieru, do ktorej sa má počítať zhoda v sekvenciách uzla, je možné interaktívne meniť prostredníctvom bežca. Ten sa nachádza v ľavej hornej časti obrazovky, hneď pod bežcami pre škálovanie veľkosti zobrazenia a jeho prednastavená hodnota je 90 percent.
+Po kliknutí pravým tlačidlom na položku „Compute subtree consensus“ dôjde k odoslaniu dát na výpočet pre konsenzu zo sekvencií z daného uzla. Mieru, do ktorej sa má počítať zhoda v sekvenciách uzla, je možné interaktívne meniť prostredníctvom bežca. Ten sa nachádza v ľavej hornej časti obrazovky, hneď pod bežcami pre škálovanie veľkosti zobrazenia a jeho prednastavená hodnota je 90 percent.
 
 Výsledok výpočtu konsenzu sekvencií z daného uzla je reprezentovaný dvojako, a to:<br>
 •	Vykreslením výsledku v pravej časti obrazovky, čím splynie medzi ostatnými sekvenciami a vďaka zarovnanej vizualizácii sekvencií pod sebou je možné ho s nimi priamo porovnávať, výsledok je zvýraznený červenou farbou<br>

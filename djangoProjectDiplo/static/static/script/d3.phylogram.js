@@ -178,7 +178,7 @@ if (!d3) {
                    deletesvgtree();
             buildtree(selector, nodes, options,lines_array,csrf);
             } else {
-                nodes.children = nodes._children;
+                nodes.childgren = nodes._children;
                 nodes._children = null;
                    deletesvgtree();
             buildtree(selector, nodes, options,lines_array,csrf);
@@ -230,7 +230,7 @@ if (!d3) {
         options = options || {}
         var w = options.width || d3.select(selector).style('width') || d3.select(selector).attr('width'),
             h = options.height || d3.select(selector).style('height') || d3.select(selector).attr('height'),
-            w = parseInt(w)/16 +1000,
+            w = parseInt(w)/32 +200,
             h = parseInt(h) * 12;
 
 
@@ -247,7 +247,7 @@ if (!d3) {
             });
         var diagonal = options.diagonal || d3.phylogram.rightAngleDiagonal();
         var vis = options.vis || d3.select(selector).append("svg:svg")
-            .attr("width", w*10)
+            .attr("width", w*40)
             .attr("height", h + 300)
             .append("svg")
             .attr("transform", "translate(20, 20)");
@@ -526,7 +526,7 @@ if (!d3) {
                     console.log('download');
 	                var svgString = getSVGString(vis.node());
                     console.log('svgstring\n'+svgString);
-	                    svgString2Image( svgString, 6*w, h+300, 'png', save ); // passes Blob and filesize String to the callback
+	                    svgString2Image( svgString, w*40, h+300, 'png', save ); // passes Blob and filesize String to the callback
 
 	function save( dataBlob, filesize ){
 	    	    	   console.log('save')

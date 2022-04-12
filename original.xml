@@ -1,174 +1,78 @@
 <phyloxml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.phyloxml.org" xsi:schemaLocation="http://www.phyloxml.org http://www.phyloxml.org/1.10/phyloxml.xsd">
   <phylogeny rooted="false">
     <clade>
-      <name>Inner21</name>
+      <name>Inner9</name>
       <branch_length>0.0</branch_length>
       <clade>
-        <name>sp|O52960|DNAK_APHHA_Chaperone_protein_DnaK_OS_Aphanothece_halophytica_OX_72020_GN_dnaK_PE_2_SV_1</name>
-        <branch_length>0.19412</branch_length>
-      </clade>
-      <clade>
-        <name>Inner20</name>
-        <branch_length>0.04184</branch_length>
+        <name>Inner8</name>
+        <branch_length>0.09802</branch_length>
         <clade>
-          <name>sp|O67118|DNAK_AQUAE_Chaperone_protein_DnaK_OS_Aquifex_aeolicus_strain_VF5_OX_224324_GN_dnaK_PE_3_SV_1</name>
-          <branch_length>0.15228</branch_length>
-        </clade>
-        <clade>
-          <name>Inner19</name>
-          <branch_length>0.01391</branch_length>
+          <name>Inner7</name>
+          <branch_length>0.08047</branch_length>
           <clade>
-            <name>Inner18</name>
-            <branch_length>0.00399</branch_length>
+            <name>Inner4</name>
+            <branch_length>0.10683</branch_length>
             <clade>
-              <name>Inner17</name>
-              <branch_length>0.00145</branch_length>
-              <clade>
-                <name>sp|A8EWT6|DNAK_ARCB4_Chaperone_protein_DnaK_OS_Arcobacter_butzleri_strain_RM4018_OX_367737_GN_dnaK_PE_3_SV_1</name>
-                <branch_length>0.13837</branch_length>
-              </clade>
-              <clade>
-                <name>Inner16</name>
-                <branch_length>0.02469</branch_length>
-                <clade>
-                  <name>Inner10</name>
-                  <branch_length>0.03348</branch_length>
-                  <clade>
-                    <name>Inner5</name>
-                    <branch_length>0.01156</branch_length>
-                    <clade>
-                      <name>sp|Q5LG30|DNAK_BACFN_Chaperone_protein_DnaK_OS_Bacteroides_fragilis_strain_ATCC_25285_/_DSM_2151_/_JCM_11019_/_NCTC_9343_OX_272559_GN_dnaK_PE_3_SV_1</name>
-                      <branch_length>0.08911</branch_length>
-                    </clade>
-                    <clade>
-                      <name>sp|B6YRF7|DNAK_AZOPC_Chaperone_protein_DnaK_OS_Azobacteroides_pseudotrichonymphae_genomovar._CFP2_OX_511995_GN_dnaK_PE_3_SV_1</name>
-                      <branch_length>0.08911</branch_length>
-                    </clade>
-                  </clade>
-                  <clade>
-                    <name>sp|B3ERN8|DNAK_AMOA5_Chaperone_protein_DnaK_OS_Amoebophilus_asiaticus_strain_5a2_OX_452471_GN_dnaK_PE_3_SV_1</name>
-                    <branch_length>0.10067</branch_length>
-                  </clade>
-                </clade>
-                <clade>
-                  <name>Inner13</name>
-                  <branch_length>0.02047</branch_length>
-                  <clade>
-                    <name>sp|Q6MNF8|DNAK_BDEBA_Chaperone_protein_DnaK_OS_Bdellovibrio_bacteriovorus_strain_ATCC_15356_/_DSM_50701_/_NCIB_9529_/_HD100_OX_264462_GN_dnaK_PE_3_SV_1</name>
-                    <branch_length>0.11368</branch_length>
-                  </clade>
-                  <clade>
-                    <name>sp|C1F2D2|DNAK_ACIC5_Chaperone_protein_DnaK_OS_Acidobacterium_capsulatum_strain_ATCC_51196_/_DSM_11244_/_JCM_7670_/_NBRC_15755_/_NCIMB_13165_/_161_OX_240015_GN_dnaK_PE_3_SV_1</name>
-                    <branch_length>0.11368</branch_length>
-                  </clade>
-                </clade>
-              </clade>
+              <name>sp|A4SLY0|HTPG_AERS4_Chaperone_protein_HtpG_OS_Aeromonas_salmonicida_strain_A449_OX_382245_GN_htpG_PE_3_SV_1</name>
+              <branch_length>0.01726</branch_length>
             </clade>
             <clade>
-              <name>Inner14</name>
-              <branch_length>0.0401</branch_length>
-              <clade>
-                <name>Inner8</name>
-                <branch_length>0.02691</branch_length>
-                <clade>
-                  <name>Inner1</name>
-                  <branch_length>0.03781</branch_length>
-                  <clade>
-                    <name>sp|Q9KD72|DNAK_BACHD_Chaperone_protein_DnaK_OS_Bacillus_halodurans_strain_ATCC_BAA-125_/_DSM_18197_/_FERM_7344_/_JCM_9153_/_C-125_OX_272558_GN_dnaK_PE_3_SV_3</name>
-                    <branch_length>0.05973</branch_length>
-                  </clade>
-                  <clade>
-                    <name>sp|B7GKC8|DNAK_ANOFW_Chaperone_protein_DnaK_OS_Anoxybacillus_flavithermus_strain_DSM_21510_/_WK1_OX_491915_GN_dnaK_PE_3_SV_1</name>
-                    <branch_length>0.05973</branch_length>
-                  </clade>
-                </clade>
-                <clade>
-                  <name>sp|A6TSM0|DNAK_ALKMQ_Chaperone_protein_DnaK_OS_Alkaliphilus_metalliredigens_strain_QYMF_OX_293826_GN_dnaK_PE_3_SV_1</name>
-                  <branch_length>0.09754</branch_length>
-                </clade>
-              </clade>
-              <clade>
-                <name>Inner9</name>
-                <branch_length>0.02475</branch_length>
-                <clade>
-                  <name>sp|A0K1L3|DNAK_ARTS2_Chaperone_protein_DnaK_OS_Arthrobacter_sp._strain_FB24_OX_290399_GN_dnaK_PE_3_SV_1</name>
-                  <branch_length>0.09971</branch_length>
-                </clade>
-                <clade>
-                  <name>sp|A0LWS7|DNAK_ACIC1_Chaperone_protein_DnaK_OS_Acidothermus_cellulolyticus_strain_ATCC_43068_/_11B_OX_351607_GN_dnaK_PE_3_SV_1</name>
-                  <branch_length>0.09971</branch_length>
-                </clade>
-              </clade>
+              <name>sp|A0KL53|HTPG_AERHH_Chaperone_protein_HtpG_OS_Aeromonas_hydrophila_subsp._hydrophila_strain_ATCC_7966_/_DSM_30187_/_JCM_1027_/_KCTC_2358_/_NCIMB_9240_OX_380703_GN_htpG_PE_3_SV_1</name>
+              <branch_length>0.01726</branch_length>
             </clade>
           </clade>
           <clade>
-            <name>Inner15</name>
-            <branch_length>0.01364</branch_length>
+            <name>Inner5</name>
+            <branch_length>0.05532</branch_length>
             <clade>
-              <name>sp|Q5PAB8|DNAK_ANAMM_Chaperone_protein_DnaK_OS_Anaplasma_marginale_strain_St._Maries_OX_234826_GN_dnaK_PE_3_SV_1</name>
-              <branch_length>0.12872</branch_length>
+              <name>sp|A6VML2|HTPG_ACTSZ_Chaperone_protein_HtpG_OS_Actinobacillus_succinogenes_strain_ATCC_55618_/_DSM_22257_/_130Z_OX_339671_GN_htpG_PE_3_SV_1</name>
+              <branch_length>0.06877</branch_length>
             </clade>
             <clade>
-              <name>Inner12</name>
-              <branch_length>0.02564</branch_length>
+              <name>Inner3</name>
+              <branch_length>0.06419</branch_length>
+              <clade>
+                <name>sp|B0BPS7|HTPG_ACTPJ_Chaperone_protein_HtpG_OS_Actinobacillus_pleuropneumoniae_serotype_3_strain_JL03_OX_434271_GN_htpG_PE_3_SV_1</name>
+                <branch_length>0.00458</branch_length>
+              </clade>
               <clade>
                 <name>Inner2</name>
-                <branch_length>0.03622</branch_length>
+                <branch_length>0.00189</branch_length>
                 <clade>
-                  <name>sp|P50019|DNAK_AGRFC_Chaperone_protein_DnaK_OS_Agrobacterium_fabrum_strain_C58_/_ATCC_33970_OX_176299_GN_dnaK_PE_2_SV_2</name>
-                  <branch_length>0.07563</branch_length>
+                  <name>sp|B3GXX7|HTPG_ACTP7_Chaperone_protein_HtpG_OS_Actinobacillus_pleuropneumoniae_serotype_7_strain_AP76_OX_537457_GN_htpG_PE_3_SV_1</name>
+                  <branch_length>0.0027</branch_length>
                 </clade>
                 <clade>
-                  <name>sp|A5FZ19|DNAK_ACICJ_Chaperone_protein_DnaK_OS_Acidiphilium_cryptum_strain_JF-5_OX_349163_GN_dnaK_PE_3_SV_1</name>
-                  <branch_length>0.07563</branch_length>
-                </clade>
-              </clade>
-              <clade>
-                <name>Inner11</name>
-                <branch_length>0.00876</branch_length>
-                <clade>
-                  <name>sp|B7J7X9|DNAK_ACIF2_Chaperone_protein_DnaK_OS_Acidithiobacillus_ferrooxidans_strain_ATCC_23270_/_DSM_14882_/_CIP_104768_/_NCIMB_8455_OX_243159_GN_dnaK_PE_3_SV_1</name>
-                  <branch_length>0.10308</branch_length>
-                </clade>
-                <clade>
-                  <name>Inner7</name>
-                  <branch_length>0.00843</branch_length>
-                  <clade>
-                    <name>Inner6</name>
-                    <branch_length>0.01084</branch_length>
-                    <clade>
-                      <name>Inner4</name>
-                      <branch_length>0.00807</branch_length>
-                      <clade>
-                        <name>sp|Q0VST6|DNAK_ALCBS_Chaperone_protein_DnaK_OS_Alcanivorax_borkumensis_strain_ATCC_700651_/_DSM_11573_/_NCIMB_13689_/_SK2_OX_393595_GN_dnaK_PE_3_SV_1</name>
-                        <branch_length>0.08382</branch_length>
-                      </clade>
-                      <clade>
-                        <name>sp|A3N3K0|DNAK_ACTP2_Chaperone_protein_DnaK_OS_Actinobacillus_pleuropneumoniae_serotype_5b_strain_L20_OX_416269_GN_dnaK_PE_3_SV_1</name>
-                        <branch_length>0.08382</branch_length>
-                      </clade>
-                    </clade>
-                    <clade>
-                      <name>Inner3</name>
-                      <branch_length>0.0124</branch_length>
-                      <clade>
-                        <name>sp|Q5P1H5|DNAK_AROAE_Chaperone_protein_DnaK_OS_Aromatoleum_aromaticum_strain_EbN1_OX_76114_GN_dnaK_PE_3_SV_1</name>
-                        <branch_length>0.07948</branch_length>
-                      </clade>
-                      <clade>
-                        <name>sp|B9MDJ7|DNAK_ACIET_Chaperone_protein_DnaK_OS_Acidovorax_ebreus_strain_TPSY_OX_535289_GN_dnaK_PE_3_SV_1</name>
-                        <branch_length>0.07948</branch_length>
-                      </clade>
-                    </clade>
-                  </clade>
-                  <clade>
-                    <name>sp|Q6F6N3|DNAK_ACIAD_Chaperone_protein_DnaK_OS_Acinetobacter_baylyi_strain_ATCC_33305_/_BD413_/_ADP1_OX_62977_GN_dnaK_PE_3_SV_1</name>
-                    <branch_length>0.09465</branch_length>
-                  </clade>
+                  <name>sp|A3N0Z5|HTPG_ACTP2_Chaperone_protein_HtpG_OS_Actinobacillus_pleuropneumoniae_serotype_5b_strain_L20_OX_416269_GN_htpG_PE_3_SV_1</name>
+                  <branch_length>0.0027</branch_length>
                 </clade>
               </clade>
             </clade>
           </clade>
+        </clade>
+        <clade>
+          <name>Inner1</name>
+          <branch_length>0.14924</branch_length>
+          <clade>
+            <name>sp|B5EQZ5|HTPG_ACIF5_Chaperone_protein_HtpG_OS_Acidithiobacillus_ferrooxidans_strain_ATCC_53993_OX_380394_GN_htpG_PE_3_SV_1</name>
+            <branch_length>0.0</branch_length>
+          </clade>
+          <clade>
+            <name>sp|B7JAR2|HTPG_ACIF2_Chaperone_protein_HtpG_OS_Acidithiobacillus_ferrooxidans_strain_ATCC_23270_/_DSM_14882_/_CIP_104768_/_NCIMB_8455_OX_243159_GN_htpG_PE_3_SV_1</name>
+            <branch_length>0.0</branch_length>
+          </clade>
+        </clade>
+      </clade>
+      <clade>
+        <name>Inner6</name>
+        <branch_length>0.05568</branch_length>
+        <clade>
+          <name>sp|A1W3A1|HTPG_ACISJ_Chaperone_protein_HtpG_OS_Acidovorax_sp._strain_JS42_OX_232721_GN_htpG_PE_3_SV_1</name>
+          <branch_length>0.11111</branch_length>
+        </clade>
+        <clade>
+          <name>sp|Q6FF82|HTPG_ACIAD_Chaperone_protein_HtpG_OS_Acinetobacter_baylyi_strain_ATCC_33305_/_BD413_/_ADP1_OX_62977_GN_htpG_PE_3_SV_1</name>
+          <branch_length>0.11111</branch_length>
         </clade>
       </clade>
     </clade>

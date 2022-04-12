@@ -232,14 +232,13 @@
 
 
 
-
+            var zoom = Boolean({{ zoom | safe }}.valueOf());
             {#var zoom_value = document.getElementById("zoom_upload").value;#}
-            zoom_value=true;
             console.log('zoom\n ' + zoom)
             var stringtofind = document.getElementById("string_to_find").value;
             var sequence = {{ sequence | safe }}
             var str ={{ sequence_analyze | safe }};
-            creategraph(str, "purple", zoom_value, "{{ string_to_find | safe}}",{{ sequence_length | safe}})
+            creategraph(str, "purple", zoom, "{{ string_to_find | safe}}",{{ sequence_length | safe}})
 
 
             function sendsequence() {

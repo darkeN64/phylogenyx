@@ -132,6 +132,7 @@ def upload(request):
         django_csrf = django.middleware.csrf.get_token(request)
         Phylo.write(tree, django_csrf+"converted.nwk", "newick")
 
+        print(Phylo.parse(tree,"newick"))
         # tree = constructor.nj(dm)
         print("tree upgma")
         print(tree)
@@ -281,7 +282,6 @@ def delete(request):
 
     obj = Sequence.objects.get(pk=id)
     if(obj.author.id==current_user.id):
-        print('user is owner')
         Sequence.objects.filter(id=id).delete()
 
     return HttpResponse('true', status=200)
