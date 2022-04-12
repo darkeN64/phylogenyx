@@ -1,78 +1,70 @@
 <phyloxml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.phyloxml.org" xsi:schemaLocation="http://www.phyloxml.org http://www.phyloxml.org/1.10/phyloxml.xsd">
   <phylogeny rooted="false">
     <clade>
-      <name>Inner9</name>
+      <name>Inner8</name>
       <branch_length>0.0</branch_length>
       <clade>
-        <name>Inner8</name>
-        <branch_length>0.09802</branch_length>
+        <name>Inner7</name>
+        <branch_length>0.0381</branch_length>
         <clade>
-          <name>Inner7</name>
-          <branch_length>0.08047</branch_length>
+          <name>Inner2</name>
+          <branch_length>0.07834</branch_length>
           <clade>
-            <name>Inner4</name>
-            <branch_length>0.10683</branch_length>
-            <clade>
-              <name>sp|A4SLY0|HTPG_AERS4_Chaperone_protein_HtpG_OS_Aeromonas_salmonicida_strain_A449_OX_382245_GN_htpG_PE_3_SV_1</name>
-              <branch_length>0.01726</branch_length>
-            </clade>
-            <clade>
-              <name>sp|A0KL53|HTPG_AERHH_Chaperone_protein_HtpG_OS_Aeromonas_hydrophila_subsp._hydrophila_strain_ATCC_7966_/_DSM_30187_/_JCM_1027_/_KCTC_2358_/_NCIMB_9240_OX_380703_GN_htpG_PE_3_SV_1</name>
-              <branch_length>0.01726</branch_length>
-            </clade>
+            <name>sp|Q7V1H4|DNAK1_PROMP_Chaperone_protein_dnaK1_OS_Prochlorococcus_marinus_subsp._pastoris_strain_CCMP1986_/_NIES-2087_/_MED4_OX_59919_GN_dnaK1_PE_3_SV_1</name>
+            <branch_length>0.1014</branch_length>
           </clade>
           <clade>
-            <name>Inner5</name>
-            <branch_length>0.05532</branch_length>
+            <name>Inner1</name>
+            <branch_length>0.01036</branch_length>
             <clade>
-              <name>sp|A6VML2|HTPG_ACTSZ_Chaperone_protein_HtpG_OS_Actinobacillus_succinogenes_strain_ATCC_55618_/_DSM_22257_/_130Z_OX_339671_GN_htpG_PE_3_SV_1</name>
-              <branch_length>0.06877</branch_length>
+              <name>sp|Q7V7N7|DNAK1_PROMM_Chaperone_protein_dnaK1_OS_Prochlorococcus_marinus_strain_MIT_9313_OX_74547_GN_dnaK1_PE_3_SV_1</name>
+              <branch_length>0.09104</branch_length>
             </clade>
             <clade>
-              <name>Inner3</name>
-              <branch_length>0.06419</branch_length>
-              <clade>
-                <name>sp|B0BPS7|HTPG_ACTPJ_Chaperone_protein_HtpG_OS_Actinobacillus_pleuropneumoniae_serotype_3_strain_JL03_OX_434271_GN_htpG_PE_3_SV_1</name>
-                <branch_length>0.00458</branch_length>
-              </clade>
-              <clade>
-                <name>Inner2</name>
-                <branch_length>0.00189</branch_length>
-                <clade>
-                  <name>sp|B3GXX7|HTPG_ACTP7_Chaperone_protein_HtpG_OS_Actinobacillus_pleuropneumoniae_serotype_7_strain_AP76_OX_537457_GN_htpG_PE_3_SV_1</name>
-                  <branch_length>0.0027</branch_length>
-                </clade>
-                <clade>
-                  <name>sp|A3N0Z5|HTPG_ACTP2_Chaperone_protein_HtpG_OS_Actinobacillus_pleuropneumoniae_serotype_5b_strain_L20_OX_416269_GN_htpG_PE_3_SV_1</name>
-                  <branch_length>0.0027</branch_length>
-                </clade>
-              </clade>
+              <name>sp|Q7VC04|DNAK1_PROMA_Chaperone_protein_dnaK1_OS_Prochlorococcus_marinus_strain_SARG_/_CCMP1375_/_SS120_OX_167539_GN_dnaK1_PE_3_SV_1</name>
+              <branch_length>0.09104</branch_length>
             </clade>
           </clade>
         </clade>
         <clade>
-          <name>Inner1</name>
-          <branch_length>0.14924</branch_length>
+          <name>Inner4</name>
+          <branch_length>0.02125</branch_length>
           <clade>
-            <name>sp|B5EQZ5|HTPG_ACIF5_Chaperone_protein_HtpG_OS_Acidithiobacillus_ferrooxidans_strain_ATCC_53993_OX_380394_GN_htpG_PE_3_SV_1</name>
-            <branch_length>0.0</branch_length>
+            <name>sp|Q5N1V0|DNAK1_SYNP6_Chaperone_protein_DnaK_1_OS_Synechococcus_sp._strain_ATCC_27144_/_PCC_6301_/_SAUG_1402/1_OX_269084_GN_dnaK1_PE_3_SV_1</name>
+            <branch_length>0.15848</branch_length>
           </clade>
           <clade>
-            <name>sp|B7JAR2|HTPG_ACIF2_Chaperone_protein_HtpG_OS_Acidithiobacillus_ferrooxidans_strain_ATCC_23270_/_DSM_14882_/_CIP_104768_/_NCIMB_8455_OX_243159_GN_htpG_PE_3_SV_1</name>
-            <branch_length>0.0</branch_length>
+            <name>sp|Q9ZEJ6|DNAK1_NOSS1_Chaperone_protein_dnaK1_OS_Nostoc_sp._strain_PCC_7120_/_SAG_25.82_/_UTEX_2576_OX_103690_GN_dnaK1_PE_3_SV_2</name>
+            <branch_length>0.15848</branch_length>
           </clade>
         </clade>
       </clade>
       <clade>
         <name>Inner6</name>
-        <branch_length>0.05568</branch_length>
+        <branch_length>0.02317</branch_length>
         <clade>
-          <name>sp|A1W3A1|HTPG_ACISJ_Chaperone_protein_HtpG_OS_Acidovorax_sp._strain_JS42_OX_232721_GN_htpG_PE_3_SV_1</name>
-          <branch_length>0.11111</branch_length>
+          <name>sp|P50020|DNAK1_SYNE7_Chaperone_protein_dnaK1_OS_Synechococcus_elongatus_strain_PCC_7942_OX_1140_GN_dnaK1_PE_3_SV_2</name>
+          <branch_length>0.17341</branch_length>
         </clade>
         <clade>
-          <name>sp|Q6FF82|HTPG_ACIAD_Chaperone_protein_HtpG_OS_Acinetobacter_baylyi_strain_ATCC_33305_/_BD413_/_ADP1_OX_62977_GN_htpG_PE_3_SV_1</name>
-          <branch_length>0.11111</branch_length>
+          <name>Inner5</name>
+          <branch_length>0.01325</branch_length>
+          <clade>
+            <name>sp|Q82EX9|DNAK1_STRAW_Chaperone_protein_dnaK1_OS_Streptomyces_avermitilis_strain_ATCC_31267_/_DSM_46492_/_JCM_5070_/_NBRC_14893_/_NCIMB_12804_/_NRRL_8165_/_MA-4680_OX_227882_GN_dnaK1_PE_3_SV_1</name>
+            <branch_length>0.16016</branch_length>
+          </clade>
+          <clade>
+            <name>Inner3</name>
+            <branch_length>0.0513</branch_length>
+            <clade>
+              <name>sp|Q486F9|DNAK1_COLP3_Chaperone_protein_DnaK_1_OS_Colwellia_psychrerythraea_strain_34H_/_ATCC_BAA-681_OX_167879_GN_dnaK1_PE_3_SV_1</name>
+              <branch_length>0.10886</branch_length>
+            </clade>
+            <clade>
+              <name>sp|Q5E4T4|DNAK1_ALIF1_Chaperone_protein_DnaK_1_OS_Aliivibrio_fischeri_strain_ATCC_700601_/_ES114_OX_312309_GN_dnaK1_PE_3_SV_1</name>
+              <branch_length>0.10886</branch_length>
+            </clade>
+          </clade>
         </clade>
       </clade>
     </clade>
