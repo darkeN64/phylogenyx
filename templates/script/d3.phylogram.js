@@ -1,36 +1,27 @@
 function deletesvgtree() {
-  // if ( $('#options').css('visibility') == 'visible' )
-  //   $('#options').css('visibility','hidden');
-  // else if ( $('#options').css('visibility') == 'hidden' )
-  //   $('#options').css('visibility','visible');
     d3.selectAll('svg > g > *').remove();
-    $('#tree-switcher').css('visibility','hidden');
-
-    document.getElementById('phylogram').innerHTML="";
-
+    $('#tree-switcher').css('visibility', 'hidden');
+    document.getElementById('phylogram').innerHTML = "";
 }
 
-      function getslidervalue() {
-                $('#consensus-slider-value').text("Value is : " + jQuery('#consensus-slider').val() + " %");
-                return jQuery('#consensus-slider').val();
-            }
+function getslidervalue() {
+    $('#consensus-slider-value').text("Value is : " + jQuery('#consensus-slider').val() + " %");
+    return jQuery('#consensus-slider').val();
+}
 
-            function getHeightSlider() {
+function getHeightSlider() {
 
-                $('#heightslider').text("Value height is : " + jQuery('#heightslider').val() + " %");
-                var heightscaler = jQuery('#heightslider').val()
-                console.log('inner function height scaler \n' + heightscaler)
-                return heightscaler;
-            }
+    $('#heightslider').text("Value height is : " + jQuery('#heightslider').val() + " %");
+    var heightscaler = jQuery('#heightslider').val()
+    return heightscaler;
+}
 
-            function getWidthScaler() {
+function getWidthScaler() {
 
-                $('#widthslider').text("Value height is : " + jQuery('#widthslider').val() + " %");
-                var widthscaler = jQuery('#widthslider').val()
-                console.log('inner function height scaler \n' + widthslider)
-                return widthscaler;
-            }
-
+    $('#widthslider').text("Value height is : " + jQuery('#widthslider').val() + " %");
+    var widthscaler = jQuery('#widthslider').val()
+    return widthscaler;
+}
 
 
 if (!d3) {
@@ -124,7 +115,9 @@ if (!d3) {
         return coordAngle
     }
 
+    // štýlovacie atribúty vygenerovaného stromu
     d3.phylogram.styleTreeNodes = function (vis) {
+        // pre každý list stromu
         vis.selectAll('g.leaf.node')
             .append("svg:circle")
             .attr("r", 4.5)
@@ -132,7 +125,7 @@ if (!d3) {
             .attr('fill', 'greenYellow')
             .attr('stroke-width', '2px')
 
-
+        // pre každý uzol stromu
         vis.selectAll('g.root.node')
             .append('svg:circle')
             .attr("r", 4.5)
@@ -141,6 +134,8 @@ if (!d3) {
             .attr('stroke-width', '2px');
     }
 
+
+    // škálovanie dĺžky vetiev
     function scaleBranchLengths(nodes, w) {
         // Visit all nodes and adjust y pos width distance metric
         var visitPreOrder = function (root, callback) {
@@ -167,76 +162,53 @@ if (!d3) {
         return yscale
     }
 
+    // funkcia na vykreslenie fylogenetickeho stromu
+    d3.phylogram.build = function buildtree(selector, nodes, options, lines_array, csrf) {
 
-    d3.phylogram.build = function buildtree (selector, nodes, options, lines_array, csrf) {
-
-        function click(d) {
-            console.log('redraw');
-            if (nodes.children == d.children) {
-                nodes._children = nodes.children;
-                nodes.children = null;
-                   deletesvgtree();
-            buildtree(selector, nodes, options,lines_array,csrf);
-            } else {
-                nodes.children = nodes._children;
-                nodes._children = null;
-                   deletesvgtree();
-            buildtree(selector, nodes, options,lines_array,csrf);
-            }
-
+        // funkcionalita Show node trace
+        // prechádza cestu od vybratného uzla po koreň stromu a vyznačuje ju novou farbou - rgba(0,0,0, a)
+        function highlight(x, y, a) {
+            var pointy = y;
+            var pointx = x;
+            vis.selectAll("path.link")
+                .attr("y2", function (d) {
+                    if (d.target.y == pointy && d.target.x == pointx) {
+                        var path = d3.select(this);
+                        if (typeof path[0][0].oldstroke === "undefined" || path[0][0].oldstroke === null) {
+                            path[0][0].oldstroke = path.attr("stroke");
+                            path.attr("stroke", "rgba(0,0,0," + a + ")");
+                        } else {
+                            path.attr("stroke", path[0][0].oldstroke);
+                            path[0][0].oldstroke = null;
+                        }
+                        pointy = d.source.y;
+                        pointx = d.source.x;
+                        a = a - 0.04;
+                        if (pointy != 0) {
+                            highlight(pointx, pointy, a);
+                        }
+                    }
+                });
         }
 
-          function highlight(x, y, a) {
-	   var pointy = y;
-	   var pointx = x;
-   		vis.selectAll("path.link")
-			.attr("y2", function(d) {
-				if(d.target.y == pointy && d.target.x == pointx) {
-					var path = d3.select(this);
-          if( typeof path[0][0].oldstroke === "undefined" || path[0][0].oldstroke === null){
-            path[0][0].oldstroke = path.attr("stroke");
-    				path.attr("stroke", "rgba(0,0,0,"+a+")");
-          } else {
-            path.attr("stroke", path[0][0].oldstroke);
-            path[0][0].oldstroke = null;
-          }
-					pointy = d.source.y;
-					pointx = d.source.x;
-					a = a-0.04;
-					if (pointy!=0) {
-    					highlight(pointx, pointy,a);
-					}
-				}
-			});
-	}
-
+        // funkcia na nájdenie sekvencie v pôvodnom zozname sekvencií(fasta)
         function sequence_search(sequence_to_find) {
             for (var i = 0; i < lines_array.length - 1; i++) {
-                // console.log('lines array\n ' + lines_array[i])
                 if (lines_array[i].includes(sequence_to_find)) {
-                    // console.log("match");
-                    // console.log(lines_array[i])
-                    // console.log("sequence is: \n" + lines_array[i + 1])
                     return lines_array[i + 1];
                 }
             }
 
         }
 
-        console.log('options width\n'+options.width);
-
-        console.log('options height\n'+options.height);
-
+        // definovanie šírky a výšky stromu
         options = options || {}
         var w = options.width || d3.select(selector).style('width') || d3.select(selector).attr('width'),
             h = options.height || d3.select(selector).style('height') || d3.select(selector).attr('height'),
-            w = parseInt(w)/16 +1000,
+            w = parseInt(w) / 16 + 1000,
             h = parseInt(h) * 12;
 
-
-
-
-
+        // začiatok skladania vizualizácie fylogenetického stromu
         var tree = options.tree || d3.layout.cluster()
             .size([h, w])
             .sort(function (node) {
@@ -247,13 +219,11 @@ if (!d3) {
             });
         var diagonal = options.diagonal || d3.phylogram.rightAngleDiagonal();
         var vis = options.vis || d3.select(selector).append("svg:svg")
-            .attr("width", w*10)
+            .attr("width", w * 10)
             .attr("height", h + 300)
             .append("svg")
             .attr("transform", "translate(20, 20)");
         var nodes = tree(nodes);
-
-
 
         if (options.skipBranchLengthScaling) {
             var yscale = d3.scale.linear()
@@ -262,7 +232,7 @@ if (!d3) {
         } else {
             var yscale = scaleBranchLengths(nodes, w)
         }
-
+        //vymaže mierku vzdialenosti za grafom
         if (!options.skipTicks) {
             vis.selectAll('line')
                 .data(yscale.ticks(10))
@@ -289,6 +259,7 @@ if (!d3) {
 
         }
 
+        //vizualiácia
         var link = vis.selectAll("path.link")
             .data(tree.links(nodes))
             .enter().append("svg:path")
@@ -298,24 +269,22 @@ if (!d3) {
             .attr("stroke", "#cd1e1e")
             .attr("stroke-width", "4px");
 
-
-        function searchInTreeForNode(noder, name) {
+         // nájdenie uzla, na ktorý klikol používateľ
+        // vstup node_array je vstupný uzol, name je názov hľadaného uzla
+        function searchInTreeForNode(node_array, name) {
             var stack = [], ii;
             stack.push(nodes[0]);
 
             var searchedNode;
 
             while (stack.length > 0) {
-                noder = stack.pop();
-                if (noder.name == name) {
-                    // console.log("found it");
-                    // console.log("node is: " + noder.name);
-                    // console.log(noder);
-                    searchedNode = noder;
-                    noder = searchedNode;
-                } else if (noder.children && noder.children.length) {
-                    for (ii = 0; ii < noder.children.length; ii += 1) {
-                        stack.push(noder.children[ii]);
+                node_array = stack.pop();
+                if (node_array.name == name) {
+                    searchedNode = node_array;
+                    node_array = searchedNode;
+                } else if (node_array.children && node_array.children.length) {
+                    for (ii = 0; ii < node_array.children.length; ii += 1) {
+                        stack.push(node_array.children[ii]);
                     }
                 }
             }
@@ -325,43 +294,30 @@ if (!d3) {
 
         var childrenarray = [];
 
+        // rekurzívne prehľadávanie všetkých dcérskych uzlov z daného uzla
+        // ak nájde zhodu, priradí
         function gorecursive(object) {
-
-
             let fasta;
             if (!object.hasOwnProperty("children")) {
-                // console.log("no children");
                 return;
             }
-
             for (var i = 0; i < 2; i++) {
-                // console.log("actual parent is :: " + object.name);
                 if (object.children[i].name) {
-                    // console.log("children.name " + object.children[i].name);
                     if (!object.children[i].name.includes("Inner")) {
                         fasta = '>' + object.children[i].name;
                         childrenarray.push(fasta);
                         childrenarray.push(object.children[i].sequence);
                     }
                     if (object.children[i].hasOwnProperty("children")) {
-                        // console.log("children.name " + object.children[i].name);
                         if (!object.children[i].name.includes("Inner")) {
                             fasta = '>' + object.children[i].name;
                             childrenarray.push(fasta);
                             childrenarray.push(object.children[i].sequence);
                         }
-
                         gorecursive(object.children[i]);
                     }
                 }
             }
-            console.log('childrenarray length is: \n' + childrenarray.length);
-
-            console.log('childrenarray is: \n');
-            for (var i = 0; i < childrenarray.length; i++) {
-                // console.log(childrenarray[i] + '\n');
-            }
-
             return childrenarray;
         }
 
@@ -369,36 +325,41 @@ if (!d3) {
             {
                 title: 'Compute subtree consensus',
                 action: function consensus(elm, d, i) {
-                                        console.log(d.name)
 
+                    //nájdenie uzla, na ktorý klikol používateľ(vstup d je vstupný uzol, d.name je jeho meno)
                     var result = searchInTreeForNode(nodes, d.name);
+                    //rekurzívne prehľadávanie všetkých dcérskych poduzlov a pridávanie ich do poľa childrenarray
                     gorecursive(result);
-                    console.log(d)
+
+                    // konverzia reprezentácie children array vo formáte JSON ---> string
                     let childrenarr = JSON.stringify(childrenarray);
+
+                    //odstránenie nechcených znakov
                     childrenarr = childrenarr.replaceAll('"', "\n")
-                    childrenarr = childrenarr.replaceAll('\\r',"")
+                    childrenarr = childrenarr.replaceAll('\\r', "")
 
-                  let slidervalue = getslidervalue();
-                    console.log('getslidervalue\n'+slidervalue);
-                     console.log(childrenarr);
-                     $('#myModal').modal('show');
+                    // otvorenie "processing okna"
+                    $('#myModal').modal('show');
+
                     $.ajax({
-
                         url: "/upload/currentnode",
                         method: "POST",
                         headers: {'X-CSRFToken': csrf},
-                        data: {'array[]': childrenarray,'consensus': getslidervalue()},
+                        data: {'array[]': childrenarray, 'consensus': getslidervalue()},
                     }).done(function (data) {
-                        console.log("end function")
+                        // po spracovaní výsledku zatvorenie "processing okna"
                         $('#myModal').modal('hide');
+
+                        // zobrazenie výsledku v modal okne
                         $('#modal-information').modal('show');
                         $('#sequence-result').html(data);
-                        //?????? TODO
-                                                $('#selected-sequencies').html(
-                                                    childrenarr
-                                                );
+                        $('#selected-sequencies').html(
+                            childrenarr
+                        );
 
-
+                        // pridanie novej vypočítanej sekvencie na Y-ovú úroveň
+                        // uzla pre ktorý je počítaná, k tomu sa pripočíta offset pre zarovnanie
+                        // s ostatnými sekvenciami
                         vis.selectAll('g.root.node').append("svg:text")
                             .attr("height", 10)
                             .attr("position", "relative")
@@ -408,38 +369,33 @@ if (!d3) {
                             .attr('font-size', '17px')
                             .attr('fill', 'red')
                             .attr("transform", function (d) {
-                                return "translate(" + (w  - d.y + 800) + "," + 0 + ")"
+                                return "translate(" + (w - d.y + 800) + "," + 0 + ")"
                             })
                             .text(function (f) {
                                 if (f.name === d.name)
                                     f.sequence = data;
                                 return f.sequence;
                             });
-
-
-                        console.log('data ' + data);
-                        var simpleData = (data);
                     }).fail(function () {
                         $('#myModal').modal('hide');
                         alert("Processing error ocurred\n");
                     });
+                    //vyprázdnenie childrenarray pre opätovné volanie funkcie
                     childrenarray = [];
                 }
             },
             {
                 title: 'Show node trace',
-                action:   function highlighter(elm,d) {
-                    console.log(d.name)
-	                var pointy = d.y;
-  		            var pointx = d.x;
-  		            var a = 1;
-  		         highlight(pointx, pointy, a);
+                action: function highlighter(elm, d) {
+                    var pointy = d.y;
+                    var pointx = d.x;
+                    var a = 1;
+                    highlight(pointx, pointy, a);
 
                 }
             },
         ]
-
-        var node = vis.selectAll("g.node")
+             vis.selectAll("g.node")
             .data(nodes)
             .enter().append("svg:g")
             .on('click', function (d) {
@@ -447,8 +403,8 @@ if (!d3) {
                 // click(d)
 
             })
-
-
+            // v prípade vykonania contextmenu akcie sa vykoná akcia d3.contextMenu
+            // s parametrom menu(pole menu položiek definované vyššie)
             .on('contextmenu', d3.contextMenu(menu))
             .attr("class", function (n) {
                 if (n.children) {
@@ -476,6 +432,7 @@ if (!d3) {
 
         d3.phylogram.styleTreeNodes(vis)
 
+        // pridávanie popisov ku uzlom a listom stromu
         if (!options.skipLabels) {
             vis.selectAll('g.root.node')
                 .append("svg:text")
@@ -488,11 +445,10 @@ if (!d3) {
                     return d.name;
                 })
                 .text(function (d) {
-                    // console.log(d);
-                    return d.name.slice(0,9);
-
+                    return d.name.slice(0, 9);
                 });
 
+            // pridanie názvu sekvencie ku listu
             vis.selectAll('g.leaf.node').append("svg:text")
                 .attr("dx", 8)
                 .attr("dy", 3)
@@ -501,9 +457,11 @@ if (!d3) {
                 .attr('font-size', '11px')
                 .attr('fill', 'black')
                 .text(function (d) {
-                    // console.log(d);
-                    return d.name.slice(0,90);
+                    //skrátenie sekvencie na 90 znakov
+                    return d.name.slice(0, 90);
                 });
+
+            // pridanie hodnoty sekvencie ku listu
             vis.selectAll('g.leaf.node').append("svg:text")
                 .attr("height", 10)
                 .attr("position", "relative")
@@ -513,27 +471,24 @@ if (!d3) {
                 .attr('font-size', '17px')
                 .attr('fill', 'black')
                 .attr("transform", function (d) {
+                    // pozícia pridanej sekvencie
                     return "translate(" + (w - d.y + 800) + "," + 0 + ")"
                 })
                 .text(function (d) {
-
                     d.sequence = sequence_search(d.name)
                     return d.sequence
                 });
         }
-  d3.select('#saveTree')
-      .on('click', function(){
-                    console.log('download');
-	                var svgString = getSVGString(vis.node());
-                    console.log('svgstring\n'+svgString);
-	                    svgString2Image( svgString, 6*w, h+300, 'png', save ); // passes Blob and filesize String to the callback
 
-	function save( dataBlob, filesize ){
-	    	    	   console.log('save')
-
-		saveAs( dataBlob, 'tree.png' ); // FileSaver.js function
-	}
-});
+        // export stromu do PNG súboru
+        d3.select('#saveTree')
+            .on('click', function () {
+                var svgString = getSVGString(vis.node());
+                svgString2Image(svgString, 6 * w, h + 300, 'png', save);
+                function save(dataBlob, filesize) {
+                    saveAs(dataBlob, 'tree.png'); // d3_toImage.sj -> FileSaver.js function
+                }
+            });
 
         return {tree: tree, vis: vis}
     }

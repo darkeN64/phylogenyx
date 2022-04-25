@@ -422,32 +422,6 @@ input[type=submit]:hover {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    /*copied from history*/
-
   .tooltip {
                 position: relative;
                 display: inline-block;
@@ -609,6 +583,3 @@ input[type=submit]:hover {
                 padding-top: 2% !important;
 
             }
-
-
-

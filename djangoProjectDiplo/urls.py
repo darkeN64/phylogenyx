@@ -23,13 +23,13 @@ from myapp import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.login_request, name='login'),
-    path('upload/', views.upload, name='upload'),
-    path('upload/currentnode', views.currentnode, name='currentnode'),
-    path('upload/options', views.options, name='options'),
+    path('tooltip', views.tooltip, name='login'),
+    path('upload/', views.treeAnalyzer, name='upload'),
+    path('upload/currentnode', views.node_consensus, name='currentnode'),
     path("register", views.register_request, name="register"),
     path("login", views.login_request, name="login"),
     path("logout", views.logout_request, name="logout"),
-    path("history", views.history, name="history"),
+    path("history", views.my_projects, name="history"),
     path("history/delete", views.delete, name="delete"),
     path("gapstats", views.getGapStatistics, name="gapstats"),
     path("getsequence", views.getSequenceString, name="getsequence"),
@@ -39,10 +39,6 @@ urlpatterns = [
     path("getphyloxmltree", views.getPhyloxmlTree, name="getphyloxml"),
     path("sequenceanalyzer", views.sequenceAnalyzer, name="sequenceanalyzer"),
     path("sequenceanalyzervariable", views.sequenceAnalyzerJQuery, name="sequenceanalyzervariable"),
-    path("tooltip", views.tooltip, name="tooltip"),
-
-    # path('consensus/', views.consensus, name='consensus'),
-
 ]
 
 if settings.DEBUG:
